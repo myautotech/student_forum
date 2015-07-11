@@ -1,0 +1,63 @@
+  <aside class="main-sidebar">
+  	<!-- sidebar: style can be found in sidebar.less -->
+  	<section class="sidebar">
+  		<!-- Sidebar user panel -->
+  		<div class="user-panel">
+  			<div class="pull-left image">
+  				<img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" />
+  			</div>
+  			<div class="pull-left info">
+  				<p><%= current_user.full_name %></p>
+  				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+  			</div>
+  		</div>
+  		<!-- search form -->
+  		<form action="#" method="get" class="sidebar-form">
+  			<div class="input-group">
+  				<input type="text" name="q" class="form-control" placeholder="Search..."/>
+  				<span class="input-group-btn">
+  					<button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+  				</span>
+  			</div>
+  		</form>
+  		<!-- /.search form -->
+  		<!-- sidebar menu: : style can be found in sidebar.less -->
+  		<ul class="sidebar-menu">
+  			<li class="header">MAIN NAVIGATION</li>
+  			<li class="<%= active_controller('dashboard') %>">
+  				<%= link_to root_path do %>
+  					<i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="pull-right"></i>
+  				<%end%>
+  			</li>
+  			<% if can? :read, Customer %>
+	  			<li class="<%= active_controller('customers') %>">
+	  				<%= link_to customers_path do %>
+	  					<i class="fa fa-user-secret"></i> <span>Customers</span> <i class="pull-right"></i>
+	  				<%end%>
+	  			</li>
+  			<%end%>
+  			<% if can? :read, User %>
+	  			<li class="<%= active_controller('users') %>">
+	  				<%= link_to users_path do %>
+	  					<i class="fa fa-user"></i> <span>Users</span> <i class="pull-right"></i>
+	  				<%end%>
+	  			</li>
+  			<%end%>
+  			<% if can? :read, Group %>
+	  			<li class="<%= active_controller('groups') %>">
+	  				<%= link_to groups_path do %>
+	  					<i class="fa fa-dashcube"></i> <span>Groups</span> <i class="pull-right"></i>
+	  				<%end%>
+	  			</li>
+  			<%end%>
+  			<% if can? :read, DownloadLog %>
+	  			<li class="<%= active_controller('file_data') %>">
+	  				<%= link_to file_data_download_history_path do %>
+	  					<i class="fa fa-cloud-download"></i> <span>Download History</span> <i class="pull-right"></i>
+	  				<%end%>
+	  			</li>
+  			<%end%>
+  		</ul>
+  	</section>
+  	<!-- /.sidebar -->
+  </aside>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StudentForum</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= user_signed_in? ? 'skin-blue sidebar-mini' : 'login-page'%>">
+<%= render 'layouts/flash_message'%>
+<%= user_signed_in? ? (render 'layouts/index') : (yield) %>
+</body>
+</html>

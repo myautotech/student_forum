@@ -1,0 +1,15 @@
+<div class="wrapper">
+	<%= render 'layouts/header' %>
+	<!-- Left side column. contains the logo and sidebar -->
+	<%= render 'layouts/slider'%>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<%= render 'layouts/content_header'%>
+		<!-- Main content -->
+		<section class="content">
+			<%= yield %>
+		</section><!-- /.content -->
+	</div><!-- /.content-wrapper -->
+	<%= render 'layouts/footer' %>
+</div><!-- ./wrapper -->

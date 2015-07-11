@@ -1,0 +1,8 @@
+<div class="form-group">
+	<div class="col-sm-2">
+		<%= label_tag :group_admin, 'Group Admin',class: 'pull-right'%>
+	</div>
+	<div class="col-sm-4">
+		<%= select :user, :id, @users.collect { |u| [u.full_name, u.id] },{selected: @group.group_admin ? @group.group_admin.id : ''},{class: 'form-control'} %>
+	</div>
+</div>

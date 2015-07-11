@@ -1,0 +1,20 @@
+<%= bootstrap_form_for([@category, @document], layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4", :html => { :class => 'form-horizontal', multipart: true }) do |f| %>
+  <%= f.text_field :title %>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :files, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to 'Add file', file_data_add_file_path, remote: true, class: 'btn btn-info btn-flat btn-xs' %>
+    </div>
+  </div>
+  <div class="row">
+	  <div class="col-sm-4 col-sm-offset-2">
+	  	<%= render '/file_data/files', object: @document %><br/>
+	  	<div class="files"></div>
+	  </div>
+  </div>
+  <div class="col-sm-2 col-sm-offset-2">
+    <%= f.submit "Save", class: "btn btn-primary btn-block btn-flat" %>
+  </div>
+<% end %>

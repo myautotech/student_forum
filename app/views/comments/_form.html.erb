@@ -1,0 +1,6 @@
+<%= bootstrap_form_for([@post, @comment],layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4") do |f| %>
+  <%= f.text_field :content, label: 'Comment' %>
+  <div class="col-sm-2 col-sm-offset-2">
+    <%= f.submit "Comment", class: "btn btn-primary btn-block btn-flat" %>
+  </div>
+<% end %>

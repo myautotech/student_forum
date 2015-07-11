@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@group, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4", html: {id: 'group_form'}) do |f| %>
+  <%= f.text_field :name, placeholder: 'Name' %>
+  <%= f.text_field :status, placeholder: 'Status' %>
+  <%= image_tag @group.image? ? @group.image : '', width: 100, height: 100, class: 'image' %>
+	<%= f.file_field :image, onchange: "readFile(this);" %>
+  <%= f.select :customer_id, @customers.collect { |c| [c.name, c.id] },{prompt: true}, {onchange: "send_customer()"} if current_user.super_admin? && @group.new_record? %>
+  <div class="users"><%= render 'users' %></div>
+  <div class="col-sm-2 col-sm-offset-2">
+    <%= f.submit "Save", class: "btn btn-primary btn-block btn-flat" %>
+  </div>
+<% end %>

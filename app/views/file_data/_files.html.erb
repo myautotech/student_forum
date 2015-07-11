@@ -1,0 +1,3 @@
+<% object.file_data.each do |file| %>
+  <%= link_to file.file_file_name, file_data_download_path(id: file.id), method: :post %><br/>
+<% end %>

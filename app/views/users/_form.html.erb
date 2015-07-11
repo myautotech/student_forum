@@ -1,0 +1,15 @@
+<%= bootstrap_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4", html: {id: 'user_form'}) do |f| %>
+	<%= f.text_field :first_name, placeholder: 'First Name' %>
+	<%= f.text_field :last_name, placeholder: 'Last Name' %>
+	<%= f.text_field :contact_no, placeholder: 'Contact No' %>
+	<%= f.email_field :email, placeholder: 'Email' %>
+	<%= f.password_field :password, placeholder: 'Password' %>
+	<%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %>
+	<%= image_tag @user.image? ? @user.image : '', width: 100, height: 100, class: 'image' %>
+	<%= f.file_field :image, onchange: "readFile(this);" %>
+	<%= f.hidden_field :customer_id, value: "#{@customer.id}" if @customer %>
+	<%= f.select :customer_id, @customers.collect { |c| [c.name, c.id] } if current_user.super_admin? && !@customer && @user.new_record?  %>
+	<div class="col-sm-2 col-sm-offset-2">
+    <%= f.submit "Save", class: "btn btn-primary btn-block btn-flat" %>
+  </div>
+<% end %>

@@ -1,0 +1,55 @@
+<%= bootstrap_form_for(@customer, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4", html: {id: 'customer_form'}) do |f| %>
+  <%= f.text_field :name, placeholder: 'Name' %>
+  <%= f.text_field :street, placeholder: 'Street' %>
+  <%= f.text_field :city, placeholder: 'City' %>
+  <%= f.text_field :state, placeholder: 'State' %>
+  <%= f.text_field :country, placeholder: 'Country' %>
+  <%= f.text_field :pincode, placeholder: 'Pincode' %>
+  <%= f.email_field :email, placeholder: 'Email' %>
+  <%= f.text_field :contact_no, placeholder: 'Contact No' %>
+  <%= image_tag @customer.logo? ? @customer.logo : '', width: 100, height: 100, class: 'image' %>
+  <%= f.file_field :logo, onchange: "readFile(this);"%>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :user_first_name, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+      <%= text_field :user, :first_name, value: @user ? @user.first_name : "", placeholder: 'First Name', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :user_last_name, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+     <%= text_field :user, :last_name, value: @user ? @user.last_name : "", placeholder: 'Last Name', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :user_contact_no, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+     <%= text_field :user, :contact_no, value: @user ? @user.contact_no : "", placeholder: 'Contact No', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :user_email, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+     <%= email_field :user, :email, value: @user ? @user.email : "", placeholder: 'Email', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <%= f.label :user_password, class: 'pull-right'%>
+    </div>
+    <div class="col-sm-4">
+     <%= password_field :user, :password, placeholder: 'Password', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-sm-2 col-sm-offset-2">
+    <%= f.submit "Save", class: "btn btn-primary btn-block btn-flat" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<% if notice %>
+	<%= content_tag :javascript do%>
+		<script type="text/javascript">
+			flash_msg("<%= notice %>");
+		</script>
+	<% end %>
+<% end %>
+<% if alert %>
+	<%= content_tag :javascript do%>
+		<script type="text/javascript">
+			flash_msg("<%= alert %>",'error');
+		</script>
+	<% end %>
+<% end %>
