@@ -9,6 +9,7 @@ $(function () {
 		radioClass: 'iradio_square-blue',
 	    increaseArea: '20%' // optional
 	});
+    $('.ckeditor').ckeditor();
 });
 
 function flash_msg(msg, type) {
@@ -38,7 +39,7 @@ function readFile(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('.image').attr('src', e.target.result);
+            $('.image-pic').attr('src', e.target.result);
         };
 
         reader.readAsDataURL(input.files[0]);
