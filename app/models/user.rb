@@ -54,4 +54,20 @@ class User < ActiveRecord::Base
     return true if groups.find_by(id: group.id)
     false
   end
+
+  def has_pic
+    return 'user2-160x160.jpg' if image.blank?
+    image
+  end
+
+  def customer_logo
+    return 'customer.png' unless customer
+    return 'customer.png' if customer.logo.blank?
+    customer.logo
+  end
+
+  def customer_name
+    return 'StudentForum' unless customer
+    customer.name
+  end
 end

@@ -84,11 +84,7 @@ class GroupsController < ApplicationController
   end
 
   def add_members
-    if current_user.super_admin?
-      @users = User.users
-    else
-      @users = User.customer_users(current_user.customer_id)
-    end
+    @users = User.customer_users(@group.customer_id)
     authorize! :update, @group
   end
 

@@ -469,16 +469,17 @@ a:focus {
 }
 .user-panel > .image > img {
   width: 100%;
-  max-width: 45px;
+  max-width: 100px;
   height: auto;
 }
-.user-panel > .info {
-  padding: 5px 5px 5px 15px;
+
+.user-panel > .image > .info {
+  color: #fff;
+  padding: 5px 5px 5px 5px;
   line-height: 1;
-  position: absolute;
-  left: 55px;
 }
-.user-panel > .info > p {
+
+.user-panel > .image > .info > p {
   font-weight: 600;
   margin-bottom: 9px;
 }
