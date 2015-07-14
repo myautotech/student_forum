@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require ckeditor-jquery
 //= require dataTables/jquery.dataTables
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require ckeditor/init
 //= require turbolinks
 //= require_tree .

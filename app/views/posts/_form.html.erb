@@ -1,8 +1,9 @@
-<%= bootstrap_form_for([@category, @post], layout: :horizontal, html:{id: 'post_form', :class => 'form-horizontal', multipart: true }) do |f| %>
+<%= bootstrap_form_for([@category, @post], layout: :horizontal, label_col: "col-sm-1", control_col: "col-sm-11", html:{id: 'post_form', :class => 'form-horizontal', multipart: true }) do |f| %>
   <%= f.text_field :title %>
-  <%= f.text_area :content, class: 'ckeditor' %>
+  <%= f.text_area :content %>
+  <br/>
   <div class="form-group">
-    <div class="col-sm-2">
+    <div class="col-sm-1">
       <%= f.label :files, class: 'pull-right'%>
     </div>
     <div class="col-sm-4">
@@ -10,12 +11,12 @@
     </div>
   </div>
   <div class="row">
-	  <div class="col-sm-4 col-sm-offset-2">
+	  <div class="col-sm-4 col-sm-offset-1">
 	  	<%= render '/file_data/files', object: @post %><br/>
 	  	<div class="files"></div>
 	  </div>
   </div>
-  <div class="col-sm-2 col-sm-offset-2">
+  <div class="col-sm-2 col-sm-offset-5">
     <%= f.submit "Save", class: "btn btn-primary btn-block btn-flat" %>
   </div>
 <% end %>

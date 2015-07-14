@@ -1,3 +1,12 @@
+$(document).ready(function() {
+   if ($('textarea').length > 0) {       
+     var data = $('textarea');
+     $.each(data, function(i) {
+       CKEDITOR.replace(data[i].id);
+     });     
+   }  
+});
+
 function send_customer() {
 	var customer_id = $('#group_customer_id').val();
     $.get('/groups/customers?customer_id='+customer_id,function(){});
@@ -9,7 +18,6 @@ $(function () {
 		radioClass: 'iradio_square-blue',
 	    increaseArea: '20%' // optional
 	});
-    $('.ckeditor').ckeditor();
 });
 
 function flash_msg(msg, type) {
