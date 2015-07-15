@@ -1,6 +1,16 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  def index
+    if current_user.super_admin?
+      @posts = Post.posts
+    elsif current_user.admin?
+      @posts = current_user.customer_posts
+    else
+      @posts = current_user.live_posts
+    end
+  end
+
   def show
     @comment = @post.comments.build
     authorize! :read, @post

@@ -1,0 +1,10 @@
+<h4><%= document.title %></h4>
+<div class="pull-right">
+	<% if can? :update, document %><%= link_to edit_category_document_path(category, document) do %><i class="fa fa-edit"></i><%end%><%end%>&nbsp;&nbsp;&nbsp;&nbsp;
+	<% if can? :delete, document %><%= link_to [category, document], method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i><%end%><%end%>
+</div>
+<p><i class="fa fa-clock-o"></i> Upload on <%= document.created_at.to_datetime %></p>
+<% if can? :read, document %>
+<%= render '/file_data/files', object: document%>
+<% end %>
+<hr>

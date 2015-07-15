@@ -6,4 +6,8 @@ class Post < ActiveRecord::Base
   def live_comments
     comments.where(is_deleted: false).order(created_at: :desc)
   end
+
+  def self.posts
+    where(is_deleted: false).order(created_at: :desc)
+  end
 end

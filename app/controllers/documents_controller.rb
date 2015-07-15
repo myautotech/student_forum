@@ -1,6 +1,16 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:edit, :update, :destroy]
 
+  def index
+    if current_user.super_admin?
+      @documents = Document.documents
+    elsif current_user.admin?
+      @documents = current_user.customer_documents
+    else
+      @documents = current_user.live_documents
+    end
+  end
+
   def new
     @category = Category.find(params[:category_id])
     @document = @category.documents.build

@@ -1,0 +1,9 @@
+<h4><%= link_to post.title, category_post_path(category, post) %></h4>
+<div class="pull-right">
+	<%if can? :update, post%><%= link_to edit_category_post_path(category,post) do%><i class="fa fa-edit"></i><%end%><%end%>&nbsp;&nbsp;&nbsp;&nbsp;
+	<%if can? :delete, post%><%= link_to [category, post], method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i><%end%><%end%>
+</div>
+<p><i class="fa fa-clock-o"></i> Posted on <%= post.created_at.to_datetime %></p>
+<p><%= post.content.html_safe %></p>
+<%= link_to category_post_path(category, post), class: 'btn btn-primary btn-xs' do %>Read More <i class="fa fa-angle-right"></i><%end%>
+<hr>

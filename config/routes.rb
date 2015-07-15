@@ -17,12 +17,13 @@ Rails.application.routes.draw do
     end
     resources :categories
   end
-  resources :categories do
+  resources :categories, only: :index do
     resources :posts
     resources :documents
   end
-  resources :posts do
+  resources :posts, only: :index do
     resources :comments
   end
+  resources :documents, only: :index
   root 'dashboard#index'
 end

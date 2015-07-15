@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :customer
   belongs_to :role
   has_and_belongs_to_many :groups
+  has_many :posts, through: :groups
+  has_many :documents, through: :groups
   has_attached_file :image
   validates_attachment_content_type :image\
   , content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
@@ -69,5 +71,21 @@ class User < ActiveRecord::Base
   def customer_name
     return 'StudentForum' unless customer
     customer.name
+  end
+
+  def live_posts
+    posts.where(is_deleted: false).order(created_at: :desc)
+  end
+
+  def live_documents
+    documents.where(is_deleted: false).order(created_at: :desc)
+  end
+
+  def customer_posts
+    customer.live_posts
+  end
+
+  def customer_documents
+    customer.live_documents
   end
 end

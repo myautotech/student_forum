@@ -1,6 +1,9 @@
 class Group < ActiveRecord::Base
   has_and_belongs_to_many :users
+  belongs_to :customer
   has_many :categories
+  has_many :posts, through: :categories
+  has_many :documents, through: :categories
   has_attached_file :image
   validates :name, uniqueness: true
   validates_attachment_content_type :image\
