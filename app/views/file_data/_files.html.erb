@@ -1,3 +1,14 @@
 <% object.file_data.each do |file| %>
-  <%= link_to file.file_file_name, file_data_download_path(id: file.id), method: :post %><br/>
+  <% if file.post.present? %>
+	<%= link_to file.file.url, target: '_blank' do %>
+	  <% if ["image/jpg", "image/jpeg", "image/png", "image/gif"].include? file.file_content_type %>
+	  	<%= image_tag file.file, class: 'post-content' %>
+	  <%else%>
+	    <%= video_tag file.file, class: 'post-content' %>
+	  <%end%>
+	  <p><%= file.file_file_name %></p>
+	<%end%>
+  <%else%>
+  	<p><%= link_to file.file_file_name, file_data_download_path(id: file.id), method: :post %></p>
+  <%end%>
 <% end %>

@@ -10,7 +10,7 @@ $(function(){
 	valid_password = {required: true, minlength: 8},
 	valid_confirm_pass = {required: true, equalTo: '#user_password'},
 	valid_image = {accept: 'jpg|jpeg|png|gif'},
-	valid_img_vd = {accept: 'jpg|jpeg|png|gif'},
+	valid_img_vd = {accept: 'jpg|jpeg|png|gif|flv|mp4|mov|wmv|avi|3gp|mkv'},
 	valid_pin = {required: true, number: true, exactlength: 6};
 	$('#customer_form').validate({
 		rules: {

@@ -29,4 +29,9 @@ class Group < ActiveRecord::Base
     role = Role.find_by(name: 'GroupAdmin')
     users.find_by(role_id: role.id)
   end
+
+  def has_pic
+    return 'photo1.png' if image.blank?
+    image
+  end
 end

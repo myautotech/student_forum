@@ -13,13 +13,6 @@
   		<!-- sidebar menu: : style can be found in sidebar.less -->
   		<ul class="sidebar-menu">
   			<li class="header">MAIN NAVIGATION</li>
-        <% if current_user.super_admin? || current_user.admin? %>
-    			<li class="<%= active_controller('dashboard') %>">
-    				<%= link_to root_path do %>
-    					<i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="pull-right"></i>
-    				<%end%>
-    			</li>
-        <%end%>
   			<% if can? :read, Customer %>
 	  			<li class="<%= active_controller('customers') %>">
 	  				<%= link_to customers_path do %>

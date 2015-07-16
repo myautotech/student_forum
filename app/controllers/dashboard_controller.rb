@@ -1,6 +1,11 @@
 class DashboardController < ApplicationController
   def index
-    redirect_to groups_path \
-    unless current_user.super_admin? || current_user.admin?
+    if current_user.super_admin?
+      redirect_to customers_path
+    elsif current_user.admin?
+      redirect_to users_path
+    else
+      redirect_to groups_path
+    end
   end
 end
