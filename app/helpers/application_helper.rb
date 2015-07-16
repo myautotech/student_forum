@@ -10,4 +10,18 @@ module ApplicationHelper
   def current_action
     params[:action].capitalize
   end
+
+  def table_td(objects)
+    return if objects.count.eql? 3
+    if objects.count.eql? 1
+      html = <<-HTML
+        <td></td><td></td>
+      HTML
+    else
+      html = <<-HTML
+        <td></td>
+      HTML
+    end
+    html.html_safe
+  end
 end

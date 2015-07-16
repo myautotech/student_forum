@@ -11,12 +11,15 @@
           <thead>
             <tr>
               <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-          <% @group.live_categories.each_slice(3) do |categories| %>
+            <% @group.live_categories.each_slice(3) do |categories| %>
             <tr>
               <% categories.each do |category| %>
+              <%= table_td(categories)%>
               <td>
                 <div class="info-box">
                   <span class="info-box-icon bg-aqua"><i class="fa fa-navicon"></i></span>
