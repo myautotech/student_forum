@@ -14,26 +14,24 @@
             </tr>
           </thead>
           <tbody>
-            <% @group.live_categories.each_slice(4) do |categories| %>
-              <tr>
-                <% categories.each do |category| %>
-                  <td>
-                    <div class="col-sm-4">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-navicon"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text"><%= link_to category.name, group_category_path(@group, category) %></span>
-                          <span class="info-box-number"><small><%= category.description %></small></span>
-                          <div class="category-action">
-                            <%if can? :update, category %><%= link_to edit_group_category_path(@group, category) do %><i class="fa fa-edit"></i><%end%><%end%>&nbsp;&nbsp;
-                            <%if can? :delete, category%><%= link_to [@group, category], method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i><%end%><%end%>
-                          </div>
-                        </div>
-                      </div>
+          <% @group.live_categories.each_slice(3) do |categories| %>
+            <tr>
+              <% categories.each do |category| %>
+              <td>
+                <div class="info-box">
+                  <span class="info-box-icon bg-aqua"><i class="fa fa-navicon"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text"><%= link_to category.name, group_category_path(@group, category) %></span>
+                    <span class="info-box-number"><small><%= category.description %></small></span>
+                    <div class="category-action">
+                      <%if can? :update, category %><%= link_to edit_group_category_path(@group, category) do %><i class="fa fa-edit"></i><%end%><%end%>&nbsp;&nbsp;
+                      <%if can? :delete, category%><%= link_to [@group, category], method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i><%end%><%end%>
                     </div>
-                  </td>
-                <%end%>
-              </tr>
+                  </div>
+                </div>
+              </td>
+              <%end%>
+            </tr>
             <% end %>
           </tbody>
         </table>
