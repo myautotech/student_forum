@@ -1,0 +1,24 @@
+<% if nf.post_ntfs? %>
+	<% post = nf.post %>
+	<li>
+		<%= link_to category_post_path(post.category, post) do %>
+			<i class="fa fa-newspaper-o"></i> New post <%= post.title %> posted on group <%= post.category.group.name %>
+		<%end%>
+	</li>
+<%end%>
+<% if nf.comment_ntfs? %>
+	<% post = nf.comment.post %>
+	<li>
+		<%= link_to category_post_path(post.category, post) do %>
+			<i class="fa fa-comment"></i> New comment added on post <%= post.title %>
+		<%end%>
+	</li>
+<%end%>
+<% if nf.document_ntfs? %>
+	<% document = nf.document %>
+	<li>
+		<%= link_to documents_path do %>
+			<i class="fa fa-newspaper-o"></i> New document <%= document.title %> uploaded on group <%= document.category.group.name %>
+		<%end%>
+	</li>
+<%end%>

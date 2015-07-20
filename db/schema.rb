@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710193256) do
+ActiveRecord::Schema.define(version: 20150720192232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,21 @@ ActiveRecord::Schema.define(version: 20150710193256) do
   add_index "groups_users", ["group_id"], name: "index_groups_users_on_group_id", using: :btree
   add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id", using: :btree
 
+  create_table "notifications", force: :cascade do |t|
+    t.boolean  "is_readed",   default: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "document_id"
+    t.integer  "comment_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "notifications", ["comment_id"], name: "index_notifications_on_comment_id", using: :btree
+  add_index "notifications", ["document_id"], name: "index_notifications_on_document_id", using: :btree
+  add_index "notifications", ["post_id"], name: "index_notifications_on_post_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -175,6 +190,10 @@ ActiveRecord::Schema.define(version: 20150710193256) do
   add_foreign_key "groups", "customers"
   add_foreign_key "groups_users", "groups"
   add_foreign_key "groups_users", "users"
+  add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "documents"
+  add_foreign_key "notifications", "posts"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "users", "customers"
   add_foreign_key "users", "roles"

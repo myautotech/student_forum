@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_many :posts, through: :groups
   has_many :documents, through: :groups
+  has_many :notifications
   has_attached_file :image
   validates_attachment_content_type :image\
   , content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
@@ -87,5 +88,13 @@ class User < ActiveRecord::Base
 
   def customer_documents
     customer.live_documents
+  end
+
+  def unread_ntfs
+    notifications.where(is_readed: false).order(created_at: :desc)
+  end
+
+  def ntfs_count
+    unread_ntfs.count
   end
 end

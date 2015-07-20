@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
+      send_notifications
       redirect_to category_post_path(@post.category, @post)\
       , notice: 'Comment was successfully created.'
     else
@@ -18,6 +19,14 @@ class CommentsController < ApplicationController
     @comment.update(is_deleted: true)
     redirect_to category_post_path(@post.category, @post)\
     , notice: 'Comment was successfully destroyed.'
+  end
+
+  def send_notifications
+    group = @post.category.group
+    group.group_users.each do |u|
+      next if current_user.eql? u
+      Notification.create(user_id: u.id, comment_id: @comment.id)
+    end
   end
 
   private

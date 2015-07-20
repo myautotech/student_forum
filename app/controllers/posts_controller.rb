@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = @post.comments.build
+    readed_notifications
     authorize! :read, @post
   end
 
@@ -31,6 +32,7 @@ class PostsController < ApplicationController
     @post = @category.posts.new(post_params)
     if @post.save
       attach_files(params[:files])
+      send_notifications
       redirect_to group_category_path(@category.group, @category)\
       , notice: 'Post was successfully created.'
     else
@@ -58,6 +60,23 @@ class PostsController < ApplicationController
   def attach_files(files)
     return if files.blank?
     files.each { |file| @post.file_data.create(file: file) }
+  end
+
+  def send_notifications
+    group = @category.group
+    group.group_users.each do |u|
+      next if current_user.eql? u
+      Notification.create(user_id: u.id, post_id: @post.id)
+    end
+  end
+
+  def readed_notifications
+    nf = current_user.unread_ntfs.find_by(post_id: @post.id)
+    nf.update(is_readed: true) if nf
+    @post.live_comments.each do |cm|
+      nf2 = current_user.unread_ntfs.find_by(comment_id: cm.id)
+      nf2.update(is_readed: true) if nf2
+    end
   end
 
   private
