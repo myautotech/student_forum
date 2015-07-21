@@ -97,4 +97,8 @@ class User < ActiveRecord::Base
   def ntfs_count
     unread_ntfs.count
   end
+
+  def has_groups
+    groups.where(is_deleted: false).order(created_at: :desc)
+  end
 end

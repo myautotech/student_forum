@@ -6,8 +6,10 @@ class GroupsController < ApplicationController
   def index
     if current_user.super_admin?
       @groups = Group.groups
-    else
+    elsif current_user.admin?
       @groups = Group.customer_groups(current_user.customer_id)
+    else
+      @groups = current_user.has_groups
     end
     authorize! :read, Group
   end
