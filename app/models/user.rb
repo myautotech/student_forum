@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   end
 
   def self.customer_users(customer_id)
-    where(customer_id: customer_id, is_deleted: false).order(created_at: :desc)
+    role = Role.find_by(name: 'Admin')
+    where(customer_id: customer_id, is_deleted: false)\
+      .order(created_at: :desc).where.not(role_id: role.id)
   end
 
   def full_name
@@ -100,5 +102,16 @@ class User < ActiveRecord::Base
 
   def has_groups
     groups.where(is_deleted: false).order(created_at: :desc)
+  end
+
+  def self.users_for_group
+    role1 = Role.find_by(name: 'SuperAdmin')
+    role2 = Role.find_by(name: 'Admin')
+    users.where.not(role_id: [role1.id, role2.id])
+  end
+
+  def self.add_users(customer_id)
+    role = Role.find_by(name: 'GroupAdmin')
+    customer_users(customer_id).where.not(role_id: role.id)
   end
 end

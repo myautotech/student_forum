@@ -60,7 +60,17 @@ class GroupsController < ApplicationController
   def update_group_admin(user)
     user = User.find_by(id: user[:id])
     return if @group.group_admin.eql? user
+    remove_old_group_admin
     assign_group_admin(user)
+  end
+
+  def remove_old_group_admin
+    user = @group.group_admin
+    gu = GroupsUser.find_by(user_id: user.id, group_id: @group.id)
+    gu.destroy if gu
+    return unless user.groups.blank?
+    role = Role.find_by(name: 'Member')
+    user.update(role_id: role.id)
   end
 
   def destroy
@@ -86,7 +96,7 @@ class GroupsController < ApplicationController
   end
 
   def add_members
-    @users = User.customer_users(@group.customer_id)
+    @users = User.add_users(@group.customer_id)
     authorize! :update, @group
   end
 
@@ -105,7 +115,7 @@ class GroupsController < ApplicationController
   def set_users
     @customers = Customer.customers
     if current_user.super_admin?
-      @users = User.users
+      @users = User.users_for_group
     else
       @users = User.customer_users(current_user.customer_id)
     end
