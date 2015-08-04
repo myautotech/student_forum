@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
     elsif current_user.admin?
       redirect_to users_path
     else
-      redirect_to groups_path
+      redirect_to posts_path
     end
   end
 end
